@@ -1,9 +1,22 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 
+import 'package:aplikasi_alquran/app/data/models/detail_surah.dart';
+import 'package:aplikasi_alquran/app/data/models/surah.dart';
+import 'package:http/http.dart' as http;
+
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  Future<List<Surah>> getAllSurah() async {
+    Uri url = Uri.parse('https://api.quran.gading.dev/surah');
+    var res = await http.get(url);
 
-  final count = 0.obs;
+    List data = (json.decode(res.body) as Map<String, dynamic>)['data'];
 
-  void increment() => count.value++;
+    if (data.isEmpty) {
+      return [];
+    } else {
+      return data.map((e) => Surah.fromJson(e)).toList();
+    }
+  }
 }
