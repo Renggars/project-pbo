@@ -31,4 +31,14 @@ void main() async {
   DetailSurah detailSurahAnnas = DetailSurah.fromJson(dataAnnas);
 
   print(detailSurahAnnas.verses?[0].text?.arab);
+
+  // Tes Model Ayat
+
+  // var res =
+  //     await http.get(Uri.parse('https://api.quran.gading.dev/surah/108/1'));
+  // Map<String, dynamic> data = json.decode(res.body)['data'];
+
+  // Ayat ayat = Ayat.fromJson(data);
+
+  // print(ayat.number?.inSurah);
 }
