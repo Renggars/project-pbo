@@ -41,10 +41,10 @@ class HomeView extends GetView<HomeController> {
                   leading: CircleAvatar(
                     child: Text("${surah.number}"),
                   ),
-                  title: Text(surah.name.transliteration.id),
+                  title: Text("${surah.name?.transliteration?.id}"),
                   subtitle: Text(
-                      "${surah.numberOfVerses} Ayat | ${surah.revelation.id}"),
-                  trailing: Text(surah.name.short),
+                      "${surah.numberOfVerses} Ayat | ${surah.revelation?.id}"),
+                  trailing: Text("${surah.name?.short}"),
                 );
               },
             );

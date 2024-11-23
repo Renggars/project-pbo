@@ -30,5 +30,5 @@ void main() async {
 
   DetailSurah detailSurahAnnas = DetailSurah.fromJson(dataAnnas);
 
-  print(detailSurahAnnas.verses[0].text.arab);
+  print(detailSurahAnnas.verses?[0].text?.arab);
 }
