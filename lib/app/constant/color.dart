@@ -31,7 +31,9 @@ ThemeData appDark = ThemeData(
   ),
   textTheme: TextTheme(
     bodyLarge: TextStyle(color: appWhite),
+    headlineLarge: TextStyle(color: appWhite),
+    headlineSmall: TextStyle(color: Colors.grey[600]),
     bodyMedium: TextStyle(color: appWhite),
-    bodySmall: TextStyle(color: appWhite),
+    bodySmall: TextStyle(color: Colors.grey[600]),
   ),
 );
