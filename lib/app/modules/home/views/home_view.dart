@@ -38,66 +38,75 @@ class HomeView extends GetView<HomeController> {
             SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(colors: [
-                    appLightPurple1,
-                    appDarkPurple,
-                  ])),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: -50,
-                    right: 0,
-                    child: Opacity(
-                      opacity: 0.8,
-                      child: SizedBox(
-                        width: 200,
-                        height: 200,
-                        child: Image.asset(
-                          "assets/images/alquran.png",
-                          fit: BoxFit.cover,
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(colors: [
+                  appLightPurple1,
+                  appDarkPurple,
+                ]),
+              ),
+              child: Material(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {},
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: -50,
+                        right: 0,
+                        child: Opacity(
+                          opacity: 0.8,
+                          child: SizedBox(
+                            width: 200,
+                            height: 200,
+                            child: Image.asset(
+                              "assets/images/alquran.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.menu_book_rounded,
-                              color: Colors.white,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.menu_book_rounded,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Terakhir dibaca",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
                             ),
-                            SizedBox(width: 10),
+                            SizedBox(height: 20),
                             Text(
-                              "Terakhir dibaca",
+                              "Al-Fatihah",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Text(
+                              "Juz 1 Ayat 5",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
-                        Text(
-                          "Al-Fatihah",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          "Juz 1 Ayat 5",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             )
           ],
