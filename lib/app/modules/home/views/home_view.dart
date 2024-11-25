@@ -112,6 +112,8 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
+                indicatorColor: Get.isDarkMode ? appPurple : appWhite,
+                labelColor: Get.isDarkMode ? appPurple : appWhite,
                 tabs: [
                   Tab(
                     text: "Surah",
@@ -151,11 +153,22 @@ class HomeView extends GetView<HomeController> {
                                   Routes.DETAIL_SURAH,
                                   arguments: surah,
                                 ),
-                                leading: CircleAvatar(
-                                  child: Text(
-                                    "${surah.number}",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
+                                leading: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        "assets/images/list.png",
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${surah.number}",
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
                                   ),
                                 ),
                                 title: Text(
@@ -176,9 +189,34 @@ class HomeView extends GetView<HomeController> {
                         }
                       },
                     ),
-                    Center(
-                      child: Text("Juz"),
-                    ),
+                    ListView.builder(
+                        itemCount: 30,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {},
+                            leading: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    "assets/images/list.png",
+                                  ),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${index + 1}",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              "Juz ${index + 1}",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          );
+                        }),
                     Center(
                       child: Text("Bookmark"),
                     ),

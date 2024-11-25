@@ -8,7 +8,7 @@ import 'package:aplikasi_alquran/app/constant/color.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      theme: appLight,
+      theme: appDark,
       title: "Application",
       // initialRoute: Routes.INTRODUCTION,
       initialRoute: Routes.HOME,
