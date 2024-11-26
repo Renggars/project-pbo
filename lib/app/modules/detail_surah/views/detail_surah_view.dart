@@ -1,3 +1,4 @@
+import 'package:aplikasi_alquran/app/constant/color.dart';
 import 'package:aplikasi_alquran/app/data/models/detail_surah.dart' as detail;
 import 'package:aplikasi_alquran/app/data/models/surah.dart';
 import 'package:flutter/material.dart';
@@ -20,32 +21,52 @@ class DetailSurahView extends GetView<DetailSurahController> {
         body: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "${surah.name?.transliteration?.id?.toUpperCase()}",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () => Get.defaultDialog(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                title: "Tafsir ${surah.name?.transliteration?.id}",
+                content: Text("${surah.tafsir?.id}"),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(colors: [
+                    appLightPurple1,
+                    appDarkPurple,
+                  ]),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "${surah.name?.transliteration?.id?.toUpperCase()}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: appWhite,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "( ${surah.name?.translation?.id?.toUpperCase()} )",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        "( ${surah.name?.translation?.id?.toUpperCase()} )",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: appWhite,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "${surah.numberOfVerses.toString()} Ayat | ${surah.revelation?.id}",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    )
-                  ],
+                      Text(
+                        "${surah.numberOfVerses.toString()} Ayat | ${surah.revelation?.id}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: appWhite,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -88,8 +109,24 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CircleAvatar(
-                                      child: Text("${index + 1}"),
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            "assets/images/list.png",
+                                          ),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "${index + 1}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                      ),
                                     ),
                                     Row(children: [
                                       IconButton(
