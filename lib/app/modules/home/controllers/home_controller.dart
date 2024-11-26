@@ -6,6 +6,7 @@ import 'package:aplikasi_alquran/app/data/models/surah.dart';
 import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
+  RxBool isDarkMode = false.obs;
   Future<List<Surah>> getAllSurah() async {
     Uri url = Uri.parse('https://api.quran.gading.dev/surah');
     var res = await http.get(url);

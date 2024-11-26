@@ -9,18 +9,21 @@ const appOrange = Color(0xFFE6704A);
 const appDarkPurple = Color(0xFF010313);
 
 ThemeData appLight = ThemeData(
-  primaryColor: appPurple,
-  scaffoldBackgroundColor: appWhite,
-  appBarTheme: AppBarTheme(
-    backgroundColor: appPurple,
-    foregroundColor: appWhite,
-  ),
-  textTheme: TextTheme(
-    bodyLarge: TextStyle(color: appPurple),
-    headlineLarge: TextStyle(color: appPurple),
-    bodyMedium: TextStyle(color: Colors.grey[500]),
-  ),
-);
+    primaryColor: appPurple,
+    scaffoldBackgroundColor: appWhite,
+    appBarTheme: AppBarTheme(
+      backgroundColor: appPurple,
+      foregroundColor: appWhite,
+    ),
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(color: appPurple),
+      headlineLarge: TextStyle(color: appPurple),
+      bodyMedium: TextStyle(color: Colors.grey[500]),
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: appPurple,
+      unselectedLabelColor: Colors.grey[500],
+    ));
 
 ThemeData appDark = ThemeData(
   primaryColor: appWhite,
@@ -35,5 +38,9 @@ ThemeData appDark = ThemeData(
     headlineSmall: TextStyle(color: Colors.grey[600]),
     bodyMedium: TextStyle(color: appWhite),
     bodySmall: TextStyle(color: Colors.grey[600]),
+  ),
+  tabBarTheme: TabBarTheme(
+    labelColor: appWhite,
+    unselectedLabelColor: Colors.grey[600],
   ),
 );

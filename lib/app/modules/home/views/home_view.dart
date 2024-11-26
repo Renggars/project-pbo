@@ -12,6 +12,9 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    if (Get.isDarkMode) {
+      controller.isDarkMode.value = true;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Al Quran App'),
@@ -112,8 +115,8 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
-                indicatorColor: Get.isDarkMode ? appPurple : appWhite,
-                labelColor: Get.isDarkMode ? appPurple : appWhite,
+                indicatorColor: appPurple,
+                labelColor: appPurple,
                 tabs: [
                   Tab(
                     text: "Surah",
@@ -224,6 +227,20 @@ class HomeView extends GetView<HomeController> {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.isDarkMode
+              ? Get.changeTheme(ThemeData.light())
+              : Get.changeTheme(ThemeData.dark());
+          controller.isDarkMode.toggle();
+        },
+        child: Obx(
+          () => Icon(
+            Icons.add,
+            color: controller.isDarkMode.isTrue ? appWhite : appPurple,
           ),
         ),
       ),

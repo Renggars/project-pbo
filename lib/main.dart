@@ -8,10 +8,11 @@ import 'package:aplikasi_alquran/app/constant/color.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      theme: appDark,
+      theme: appLight,
+      darkTheme: appDark,
       title: "Application",
-      // initialRoute: Routes.INTRODUCTION,
-      initialRoute: Routes.HOME,
+      initialRoute: Routes.INTRODUCTION,
+      // initialRoute: Routes.HOME,
       getPages: AppPages.routes,
     ),
   );
