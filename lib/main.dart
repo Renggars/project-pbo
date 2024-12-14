@@ -9,7 +9,6 @@ void main() {
   runApp(
     GetMaterialApp(
       theme: appLight,
-      darkTheme: appDark,
       title: "Application",
       initialRoute: Routes.INTRODUCTION,
       // initialRoute: Routes.HOME,

@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       body: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -45,8 +45,8 @@ class HomeView extends GetView<HomeController> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   gradient: LinearGradient(colors: [
-                    appLightPurple1,
-                    appDarkPurple,
+                    greenPrimary,
+                    Colors.teal[700]!,
                   ]),
                 ),
                 child: Material(
@@ -115,14 +115,11 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
-                indicatorColor: appPurple,
-                labelColor: appPurple,
+                indicatorColor: greenPrimary,
+                labelColor: greenPrimary,
                 tabs: [
                   Tab(
                     text: "Surah",
-                  ),
-                  Tab(
-                    text: "Juz",
                   ),
                   Tab(
                     text: "Bookmark",
@@ -192,34 +189,6 @@ class HomeView extends GetView<HomeController> {
                         }
                       },
                     ),
-                    ListView.builder(
-                        itemCount: 30,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            onTap: () {},
-                            leading: Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    "assets/images/list.png",
-                                  ),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${index + 1}",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ),
-                            ),
-                            title: Text(
-                              "Juz ${index + 1}",
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          );
-                        }),
                     Center(
                       child: Text("Bookmark"),
                     ),
@@ -227,20 +196,6 @@ class HomeView extends GetView<HomeController> {
                 ),
               )
             ],
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.isDarkMode
-              ? Get.changeTheme(ThemeData.light())
-              : Get.changeTheme(ThemeData.dark());
-          controller.isDarkMode.toggle();
-        },
-        child: Obx(
-          () => Icon(
-            Icons.add,
-            color: controller.isDarkMode.isTrue ? appWhite : appPurple,
           ),
         ),
       ),
