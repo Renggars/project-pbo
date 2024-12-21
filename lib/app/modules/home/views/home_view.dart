@@ -201,7 +201,7 @@ class HomeView extends GetView<HomeController> {
                           }
 
                           // ignore: prefer_is_empty
-                          if (snapshot.data?.length == 0) {
+                          if (snapshot.data!.length == 0) {
                             return Center(
                               child: Text("Belum ada bookmark"),
                             );
@@ -236,12 +236,22 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ),
                                 title: Text(
-                                  "${dataBookmark["surah"]}",
+                                  dataBookmark["surah"]
+                                      .toString()
+                                      .replaceAll("+", "'"),
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 subtitle: Text(
                                   "Ayat ${dataBookmark["ayat"]}",
                                   style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    c.deleteBookmark(dataBookmark["id"]);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                  ),
                                 ),
                               );
                             },
