@@ -29,7 +29,7 @@ class DetailSurahController extends GetxController {
           lastVerse = ayat;
         }
         lastVerse!.kondisiAudio = "stop";
-        lastVerse = ayat;
+        lastVerse = ayat; // logic ketika lastVerse sudah ada
         lastVerse!.kondisiAudio = "stop";
         update();
         await player
