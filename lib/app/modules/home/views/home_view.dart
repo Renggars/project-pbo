@@ -189,9 +189,66 @@ class HomeView extends GetView<HomeController> {
                         }
                       },
                     ),
-                    Center(
-                      child: Text("Bookmark"),
-                    ),
+                    GetBuilder<HomeController>(builder: (c) {
+                      return FutureBuilder<List<Map<String, dynamic>>>(
+                        future: c.getBookmark(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          // ignore: prefer_is_empty
+                          if (snapshot.data?.length == 0) {
+                            return Center(
+                              child: Text("Belum ada bookmark"),
+                            );
+                          }
+
+                          return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> dataBookmark =
+                                  snapshot.data![index];
+                              return ListTile(
+                                onTap: () {
+                                  // ignore: avoid_print
+                                  print("data");
+                                },
+                                leading: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        "assets/images/list.png",
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${index + 1}",
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                                  ),
+                                ),
+                                title: Text(
+                                  "${dataBookmark["surah"]}",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                subtitle: Text(
+                                  "Ayat ${dataBookmark["ayat"]}",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    })
                   ],
                 ),
               )

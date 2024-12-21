@@ -26,7 +26,7 @@ class DetailSurahController extends GetxController {
     } else {
       List checkData = await db.query("bookmark",
           where:
-              "surah = '${surah.name?.transliteration?.id}' and ayat = ${ayat.number?.inSurah} and juz = ${ayat.meta?.juz} and via = 'surah' and index_ayat = $indexAyat and last_read = 0");
+              'surah = "${surah.name?.transliteration?.id}" and ayat = ${ayat.number?.inSurah} and juz = ${ayat.meta?.juz} and via = "surah" and index_ayat = $indexAyat and last_read = 0');
       // ignore: prefer_is_empty
       if (checkData.length != 0) {
         flagExist = true;
@@ -45,9 +45,6 @@ class DetailSurahController extends GetxController {
 
       Get.back(); // tutup dialog
       Get.snackbar("Berhasil", "Berhasil ditambahkan ke bookmark");
-
-      var data = await db.query("bookmark");
-      print(data);
     } else {
       Get.back(); // tutup dialog
       Get.snackbar("Terjadi Kesalahan", "Bookmark sudah ada");

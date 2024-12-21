@@ -19,6 +19,7 @@ ThemeData appLight = ThemeData(
       bodyLarge: TextStyle(color: Colors.black),
       headlineLarge: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black),
+      bodySmall: TextStyle(color: greenPrimary),
     ),
     tabBarTheme: TabBarTheme(
       labelColor: greenPrimary,
