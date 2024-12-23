@@ -17,7 +17,7 @@ ThemeData appLight = ThemeData(
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.black),
-      headlineLarge: TextStyle(color: Colors.black),
+      headlineLarge: TextStyle(color: greenPrimary),
       bodyMedium: TextStyle(color: Colors.black),
       bodySmall: TextStyle(color: greenPrimary),
     ),
