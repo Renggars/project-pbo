@@ -179,9 +179,9 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   InkWell(
-                    // onTap: () {
-                    //   Get.toNamed(Routes.QIBLAT);
-                    // },
+                    onTap: () {
+                      Get.toNamed(Routes.KIBLAT);
+                    },
                     borderRadius: BorderRadius.circular(12),
                     child: Column(
                       children: [
@@ -199,7 +199,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "Qiblat",
+                          "Kiblat",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.teal[700],
