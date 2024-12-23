@@ -114,6 +114,132 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.PRAYER_TIME);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: greenPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.access_time,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Sholat",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.teal[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    // onTap: () {
+                    //   Get.toNamed(Routes.ADZAN);
+                    // },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: greenPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.volume_up,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Adzan",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.teal[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    // onTap: () {
+                    //   Get.toNamed(Routes.QIBLAT);
+                    // },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: greenPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.explore,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Qiblat",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.teal[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    // onTap: () {
+                    //   Get.toNamed(Routes.MASJID_TERDEKAT);
+                    // },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: greenPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Masjid",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.teal[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               TabBar(
                 indicatorColor: greenPrimary,
                 labelColor: greenPrimary,
