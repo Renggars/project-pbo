@@ -149,9 +149,9 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   InkWell(
-                    // onTap: () {
-                    //   Get.toNamed(Routes.ADZAN);
-                    // },
+                    onTap: () {
+                      Get.toNamed(Routes.ADZAN);
+                    },
                     borderRadius: BorderRadius.circular(12),
                     child: Column(
                       children: [

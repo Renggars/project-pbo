@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/adzan/bindings/adzan_binding.dart';
+import '../modules/adzan/views/adzan_view.dart';
 import '../modules/detail_surah/bindings/detail_surah_binding.dart';
 import '../modules/detail_surah/views/detail_surah_view.dart';
 import '../modules/doa/bindings/doa_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.MASJID,
       page: () => MasjidView(),
       binding: MasjidBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADZAN,
+      page: () => const AdzanView(),
+      binding: AdzanBinding(),
     ),
   ];
 }
