@@ -10,6 +10,7 @@ abstract class Routes {
   static const LAST_READ = _Paths.LAST_READ;
   static const PRAYER_TIME = _Paths.PRAYER_TIME;
   static const KIBLAT = _Paths.KIBLAT;
+  static const DOA = _Paths.DOA;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const LAST_READ = '/last-read';
   static const PRAYER_TIME = '/prayer-time';
   static const KIBLAT = '/kiblat';
+  static const DOA = '/doa';
 }

@@ -238,6 +238,36 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.DOA);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: greenPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.menu_book,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Doa",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.teal[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               TabBar(

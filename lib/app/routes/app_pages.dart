@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/detail_surah/bindings/detail_surah_binding.dart';
 import '../modules/detail_surah/views/detail_surah_view.dart';
+import '../modules/doa/bindings/doa_binding.dart';
+import '../modules/doa/views/doa_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/introduction/bindings/introduction_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.KIBLAT,
       page: () => const KiblatView(),
       binding: KiblatBinding(),
+    ),
+    GetPage(
+      name: _Paths.DOA,
+      page: () => DoaView(),
+      binding: DoaBinding(),
     ),
   ];
 }
