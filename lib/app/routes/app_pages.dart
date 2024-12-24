@@ -12,6 +12,8 @@ import '../modules/kiblat/bindings/kiblat_binding.dart';
 import '../modules/kiblat/views/kiblat_view.dart';
 import '../modules/last_read/bindings/last_read_binding.dart';
 import '../modules/last_read/views/last_read_view.dart';
+import '../modules/masjid/bindings/masjid_binding.dart';
+import '../modules/masjid/views/masjid_view.dart';
 import '../modules/prayer_time/bindings/prayer_time_binding.dart';
 import '../modules/prayer_time/views/prayer_time_view.dart';
 import '../modules/searching/bindings/searching_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.DOA,
       page: () => DoaView(),
       binding: DoaBinding(),
+    ),
+    GetPage(
+      name: _Paths.MASJID,
+      page: () => MasjidView(),
+      binding: MasjidBinding(),
     ),
   ];
 }

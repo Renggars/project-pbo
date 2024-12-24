@@ -209,9 +209,9 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   InkWell(
-                    // onTap: () {
-                    //   Get.toNamed(Routes.MASJID_TERDEKAT);
-                    // },
+                    onTap: () {
+                      Get.toNamed(Routes.MASJID);
+                    },
                     borderRadius: BorderRadius.circular(12),
                     child: Column(
                       children: [

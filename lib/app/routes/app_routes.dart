@@ -11,6 +11,7 @@ abstract class Routes {
   static const PRAYER_TIME = _Paths.PRAYER_TIME;
   static const KIBLAT = _Paths.KIBLAT;
   static const DOA = _Paths.DOA;
+  static const MASJID = _Paths.MASJID;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const PRAYER_TIME = '/prayer-time';
   static const KIBLAT = '/kiblat';
   static const DOA = '/doa';
+  static const MASJID = '/masjid';
 }
