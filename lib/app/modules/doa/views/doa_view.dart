@@ -1,8 +1,8 @@
+import 'package:aplikasi_alquran/app/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/doa_controller.dart';
 
-// ignore: use_key_in_widget_constructors
 class DoaView extends StatelessWidget {
   final DoaController controller = Get.put(DoaController());
 
@@ -10,7 +10,8 @@ class DoaView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kumpulan Doa'),
+        title: Text('Doa Sehari-Hari'),
+        centerTitle: true,
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -20,16 +21,72 @@ class DoaView extends StatelessWidget {
           itemCount: controller.doaList.length,
           itemBuilder: (context, index) {
             final doa = controller.doaList[index];
-            return Card(
-              margin: EdgeInsets.all(8.0),
-              child: ListTile(
-                title: Text(doa.doa ?? 'No Title'),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+
+            return ListTile(
+              contentPadding: EdgeInsets.zero,
+              dense: true,
+              title: Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  childrenPadding: EdgeInsets.zero,
+                  title: Row(
+                    children: [
+                      Container(
+                        height: 55,
+                        width: 55,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/list.png"),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "${index + 1}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          doa.doa ?? 'No Title',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                    ],
+                  ),
                   children: [
-                    Text('Ayat: ${doa.ayat ?? '-'}'),
-                    Text('Latin: ${doa.latin ?? '-'}'),
-                    Text('Artinya: ${doa.artinya ?? '-'}'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            doa.ayat ?? '-',
+                            style: TextStyle(fontSize: 20),
+                            textAlign: TextAlign.end,
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            doa.latin ?? '-',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                                color: greenPrimary),
+                            textAlign: TextAlign.end,
+                          ),
+                          SizedBox(height: 6),
+                          Text(doa.artinya ?? ' - ',
+                              style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.start),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
