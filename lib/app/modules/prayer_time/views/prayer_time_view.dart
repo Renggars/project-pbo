@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../controllers/prayer_time_controller.dart';
 
 class PrayerTimeView extends GetView<PrayerTimeController> {
@@ -49,31 +50,58 @@ class PrayerTimeView extends GetView<PrayerTimeController> {
           // Menampilkan data dalam bentuk tabel horizontal
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text("Tanggal")),
-                  DataColumn(label: Text("Imsak")),
-                  DataColumn(label: Text("Subuh")),
-                  DataColumn(label: Text("Terbit")),
-                  DataColumn(label: Text("Dzuhur")),
-                  DataColumn(label: Text("Ashar")),
-                  DataColumn(label: Text("Maghrib")),
-                  DataColumn(label: Text("Isya")),
-                ],
-                rows: controller.prayerTimes.map((prayer) {
-                  return DataRow(cells: [
-                    DataCell(Text(prayer.tanggal.toString())), // Tanggal
-                    DataCell(Text(prayer.imsyak.toString())), // Imsak
-                    DataCell(Text(prayer.shubuh.toString())), // Subuh
-                    DataCell(Text(prayer.terbit.toString())), // Terbit
-                    DataCell(Text(prayer.dzuhur.toString())), // Dzuhur
-                    DataCell(Text(prayer.ashr.toString())), // Ashar
-                    DataCell(Text(prayer.magrib.toString())), // Maghrib
-                    DataCell(Text(prayer.isya.toString())), // Isya
-                  ]);
-                }).toList(),
+            child: SizedBox(
+              width: MediaQuery.of(context)
+                  .size
+                  .width, // Menyesuaikan dengan lebar layar
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: DataTable(
+                  headingRowColor: WidgetStateProperty.resolveWith(
+                    (states) => const Color(
+                        0xFF557D7F), // Warna background untuk header
+                  ),
+                  headingTextStyle: const TextStyle(
+                    color: Colors.white, // Warna teks pada header
+                    fontWeight: FontWeight.bold,
+                  ),
+                  columns: const [
+                    DataColumn(label: Text("Tanggal")),
+                    DataColumn(label: Text("Imsak")),
+                    DataColumn(label: Text("Subuh")),
+                    DataColumn(label: Text("Terbit")),
+                    DataColumn(label: Text("Dzuhur")),
+                    DataColumn(label: Text("Ashar")),
+                    DataColumn(label: Text("Maghrib")),
+                    DataColumn(label: Text("Isya")),
+                  ],
+                  rows: controller.prayerTimes.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final prayer = entry.value;
+                    final isEven = index % 2 == 0;
+                    final backgroundColor = isEven
+                        ? const Color(0xFFF3FDFE)
+                        : const Color(0xFFD2E7E8);
+
+                    final formattedDate =
+                        DateFormat('yyyy-MM-dd').format(prayer.tanggal!);
+
+                    return DataRow(
+                      color: WidgetStateProperty.resolveWith(
+                          (states) => backgroundColor),
+                      cells: [
+                        DataCell(Text(formattedDate)),
+                        DataCell(Text(prayer.imsyak.toString())),
+                        DataCell(Text(prayer.shubuh.toString())),
+                        DataCell(Text(prayer.terbit.toString())),
+                        DataCell(Text(prayer.dzuhur.toString())),
+                        DataCell(Text(prayer.ashr.toString())),
+                        DataCell(Text(prayer.magrib.toString())),
+                        DataCell(Text(prayer.isya.toString())),
+                      ],
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           );

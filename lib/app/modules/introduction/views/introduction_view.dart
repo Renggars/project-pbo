@@ -76,7 +76,7 @@ class IntroductionView extends GetView<IntroductionController> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.yellow[500],
                             foregroundColor:
-                                const Color.fromARGB(255, 151, 86, 204),
+                                const Color.fromARGB(255, 94, 36, 141),
                           ),
                           child: Text("Get Started"),
                         ),
