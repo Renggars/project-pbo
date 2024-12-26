@@ -27,11 +27,11 @@ class MasjidController {
   }
 
   // Mengambil data masjid terdekat menggunakan Nominatim API
-  Future<List<dynamic>> getNearbyMosques(double lat, double lon) async {
+  Future<List<dynamic>> getMasjidTerdekat(double lat, double lon) async {
     try {
       final url = 'https://nominatim.openstreetmap.org/search';
       final response = await Dio().get(url, queryParameters: {
-        'q': 'mosque',
+        'q': 'Masjid', // Gunakan kata kunci untuk pencarian di Indonesia
         'format': 'json',
         'limit': 10,
         'lat': lat,
@@ -43,6 +43,7 @@ class MasjidController {
         mosques = response.data;
         return mosques;
       } else {
+        print('Error: ${response.statusCode}');
         return [];
       }
     } catch (e) {

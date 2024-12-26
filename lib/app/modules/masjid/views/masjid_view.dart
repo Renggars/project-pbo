@@ -11,25 +11,29 @@ class MasjidView extends StatefulWidget {
 class _MasjidViewState extends State<MasjidView> {
   final MasjidController _controller = MasjidController();
   LatLng? userLocation;
-  List<dynamic> mosques = [];
+  List<dynamic> dataMasjid = [];
 
   @override
   void initState() {
     super.initState();
-    loadMosques();
+    loadMasjid();
   }
 
-  Future<void> loadMosques() async {
+  Future<void> loadMasjid() async {
     final location = await _controller.getUserLocation();
     if (location != null) {
-      final mosqueList = await _controller.getNearbyMosques(
+      final masjidList = await _controller.getMasjidTerdekat(
         location.latitude,
         location.longitude,
       );
       setState(() {
         userLocation = location;
-        mosques = mosqueList;
+        dataMasjid = masjidList;
       });
+
+      // Debugging untuk melihat data masjid
+      // print('User Location: $userLocation');
+      // print('Mosques: $dataMasjid');
     }
   }
 
@@ -38,6 +42,7 @@ class _MasjidViewState extends State<MasjidView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Peta Masjid Terdekat'),
+        centerTitle: true,
       ),
       body: userLocation == null
           ? Center(child: CircularProgressIndicator())
@@ -48,9 +53,7 @@ class _MasjidViewState extends State<MasjidView> {
               ),
               children: [
                 TileLayer(
-                  urlTemplate:
-                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  subdomains: ['a', 'b', 'c'],
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 ),
                 MarkerLayer(
                   markers: [
@@ -66,20 +69,21 @@ class _MasjidViewState extends State<MasjidView> {
                       ),
                     ),
                     // Marker untuk masjid terdekat
-                    for (var mosque in mosques)
-                      Marker(
-                        point: LatLng(
-                          double.parse(mosque['lat']),
-                          double.parse(mosque['lon']),
+                    for (var masjid in dataMasjid)
+                      if (masjid['lat'] != null && masjid['lon'] != null)
+                        Marker(
+                          point: LatLng(
+                            double.parse(masjid['lat']),
+                            double.parse(masjid['lon']),
+                          ),
+                          width: 50,
+                          height: 50,
+                          child: Icon(
+                            Icons.location_pin,
+                            color: Colors.green,
+                            size: 40,
+                          ),
                         ),
-                        width: 50,
-                        height: 50,
-                        child: Icon(
-                          Icons.location_pin,
-                          color: Colors.green,
-                          size: 40,
-                        ),
-                      ),
                   ],
                 ),
               ],
