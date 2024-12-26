@@ -15,7 +15,7 @@ class DetailSurahController extends GetxController {
 
   DatabaseManager database = DatabaseManager.instance;
 
-  void addBookmark(
+  Future<void> addBookmark(
       bool lastRead, DetailSurah surah, Verse ayat, int indexAyat) async {
     Database db = await database.db;
 

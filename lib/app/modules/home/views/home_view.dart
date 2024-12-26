@@ -40,133 +40,27 @@ class HomeView extends GetView<HomeController> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              FutureBuilder<Map<String, dynamic>?>(
-                  future: controller.getLastRead(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(colors: [
-                            appLightPurple1,
-                            appDarkPurple,
-                          ]),
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              bottom: -50,
-                              right: 0,
-                              child: Opacity(
-                                opacity: 0.8,
-                                child: SizedBox(
-                                  width: 200,
-                                  height: 200,
-                                  child: Image.asset(
-                                    "assets/images/alquran.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu_book_rounded,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Terakhir dibaca",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(height: 20),
-                                  Text(
-                                    "Loading...",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                    "",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-
-                    Map<String, dynamic>? lastRead = snapshot.data;
-
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(colors: [
-                          greenPrimary,
-                          Colors.teal[700]!,
-                        ]),
-                      ),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onLongPress: () => {
-                            if (lastRead != null)
-                              {
-                                Get.defaultDialog(
-                                  title: "Delete Last Read",
-                                  middleText:
-                                      "Yakin ingin menghapus last read bookmark?",
-                                  actions: [
-                                    OutlinedButton(
-                                      onPressed: () => Get.back(),
-                                      child: Text("CANCEL"),
-                                    ),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          controller
-                                              .deleteBookmark(lastRead["id"]);
-                                        },
-                                        child: Text("DELETE"))
-                                  ],
-                                )
-                              }
-                          },
-                          onTap: () => {
-                            if (lastRead != null)
-                              {
-                                // bisa di arahkan ke page last read
-                                Get.toNamed(
-                                  Routes.LAST_READ,
-                                  arguments: lastRead,
-                                )
-                              }
-                          },
-                          borderRadius: BorderRadius.circular(20),
+              GetBuilder<HomeController>(builder: (c) {
+                return FutureBuilder<Map<String, dynamic>?>(
+                    future: c.getLastRead(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(colors: [
+                              appLightPurple1,
+                              appDarkPurple,
+                            ]),
+                          ),
                           child: Stack(
                             children: [
                               Positioned(
                                 bottom: -50,
                                 right: 0,
                                 child: Opacity(
-                                  opacity: 0.9,
+                                  opacity: 0.8,
                                   child: SizedBox(
                                     width: 200,
                                     height: 200,
@@ -199,20 +93,14 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                     SizedBox(height: 20),
                                     Text(
-                                      lastRead == null
-                                          ? ""
-                                          : lastRead["surah"]
-                                              .toString()
-                                              .replaceAll("+", "'"),
+                                      "Loading...",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                       ),
                                     ),
                                     Text(
-                                      lastRead == null
-                                          ? "Belum ada data"
-                                          : "Juz ${lastRead["juz"]} | Ayat ${lastRead["ayat"]}",
+                                      "",
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -222,10 +110,124 @@ class HomeView extends GetView<HomeController> {
                               ),
                             ],
                           ),
+                        );
+                      }
+
+                      Map<String, dynamic>? lastRead = snapshot.data;
+
+                      return Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(colors: [
+                            greenPrimary,
+                            Colors.teal[700]!,
+                          ]),
                         ),
-                      ),
-                    );
-                  }),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onLongPress: () => {
+                              if (lastRead != null)
+                                {
+                                  Get.defaultDialog(
+                                    title: "Delete Last Read",
+                                    middleText:
+                                        "Yakin ingin menghapus last read bookmark?",
+                                    actions: [
+                                      OutlinedButton(
+                                        onPressed: () => Get.back(),
+                                        child: Text("CANCEL"),
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            c.deleteBookmark(lastRead["id"]);
+                                          },
+                                          child: Text("DELETE"))
+                                    ],
+                                  )
+                                }
+                            },
+                            onTap: () => {
+                              if (lastRead != null)
+                                {
+                                  // bisa di arahkan ke page last read
+                                  Get.toNamed(
+                                    Routes.LAST_READ,
+                                    arguments: lastRead,
+                                  )
+                                }
+                            },
+                            borderRadius: BorderRadius.circular(20),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  bottom: -50,
+                                  right: 0,
+                                  child: Opacity(
+                                    opacity: 0.9,
+                                    child: SizedBox(
+                                      width: 200,
+                                      height: 200,
+                                      child: Image.asset(
+                                        "assets/images/alquran.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.menu_book_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            "Terakhir dibaca",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20),
+                                      Text(
+                                        lastRead == null
+                                            ? ""
+                                            : lastRead["surah"]
+                                                .toString()
+                                                .replaceAll("+", "'"),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        lastRead == null
+                                            ? "Belum ada data"
+                                            : "Juz ${lastRead["juz"]} | Ayat ${lastRead["ayat"]}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              }),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

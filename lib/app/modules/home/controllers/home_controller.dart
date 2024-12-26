@@ -31,6 +31,7 @@ class HomeController extends GetxController {
     await db.delete("bookmark", where: "id = $id");
     update();
 
+    Get.back();
     Get.snackbar("Berhasil", "Telah berhasil meghapus bookmark");
   }
 
