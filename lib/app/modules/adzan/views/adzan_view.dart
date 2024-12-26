@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart'; // Tambahkan package intl
 import '../controllers/adzan_controller.dart';
 
 class AdzanView extends StatelessWidget {
@@ -11,85 +12,85 @@ class AdzanView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Waktu Adzan'),
+        title: const Text('Waktu Adzan Hari Ini'),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            // Tombol untuk memuat data waktu adzan
-            ElevatedButton(
-              onPressed: () {
-                controller.fetchAdzanTimes(); // Memuat data waktu adzan
-              },
-              child: Text('Load Waktu Adzan'),
-            ),
-            SizedBox(height: 20),
+        padding: const EdgeInsets.all(16),
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (controller.prayerTimes.isEmpty) {
+            return const Center(child: Text('Tidak ada data waktu adzan.'));
+          } else {
+            var todayPrayers = controller.prayerTimes.where((prayer) {
+              final today = DateTime.now();
+              return prayer.tanggal?.day == today.day &&
+                  prayer.tanggal?.month == today.month &&
+                  prayer.tanggal?.year == today.year;
+            }).toList();
 
-            // Menampilkan status loading atau data waktu adzan
-            Obx(() {
-              if (controller.isLoading.value) {
-                return CircularProgressIndicator();
-              } else {
-                if (controller.prayerTimes.isEmpty) {
-                  return Text('Tidak ada data.');
-                } else {
-                  // Menampilkan waktu adzan hari ini saja
-                  var todayPrayers = controller.prayerTimes
-                      .where((prayer) =>
-                          prayer.tanggal?.day == DateTime.now().day &&
-                          prayer.tanggal?.month == DateTime.now().month &&
-                          prayer.tanggal?.year == DateTime.now().year)
-                      .toList();
+            if (todayPrayers.isEmpty) {
+              return const Center(
+                  child:
+                      Text('Data waktu adzan untuk hari ini tidak tersedia.'));
+            }
 
-                  return Column(
-                    children: todayPrayers.map((prayer) {
-                      return Column(
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: todayPrayers.map((prayer) {
+                  final DateFormat dateFormat = DateFormat('dd MMM yyyy');
+                  String formattedDate = dateFormat.format(prayer.tanggal!);
+
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    elevation: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Tanggal: ${prayer.tanggal?.toLocal()}'),
-                          Text('Imsyak: ${prayer.imsyak}'),
-                          Text('Shubuh: ${prayer.shubuh}'),
-                          Text('Dzuhur: ${prayer.dzuhur}'),
-                          Text('Ashr: ${prayer.ashr}'),
-                          Text('Magrib: ${prayer.magrib}'),
-                          Text('Isya: ${prayer.isya}'),
-                          SizedBox(height: 10),
-                          // Tombol untuk memutar adzan biasa
-                          ElevatedButton(
-                            onPressed: () {
-                              controller.playAdzan(); // Memutar adzan biasa
-                            },
-                            child: Text('Putar Adzan Biasa'),
+                          Text(
+                            'Tanggal: $formattedDate',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          SizedBox(height: 10),
-                          // Tombol untuk memutar adzan shubuh
-                          ElevatedButton(
-                            onPressed: () {
-                              controller.playAdzanShubuh();
-                            },
-                            child: Text('Putar Adzan Shubuh'),
-                          ),
-                          SizedBox(height: 10),
-                          // Tombol untuk menghentikan adzan
-                          ElevatedButton(
-                            onPressed: () {
-                              controller
-                                  .stopAdzan(); // Menstop adzan yang sedang diputar
-                            },
-                            child: Text('Stop Adzan'),
-                          ),
+                          const SizedBox(height: 10),
+                          _buildPrayerTimeRow('Shubuh', prayer.shubuh),
+                          _buildPrayerTimeRow('Dzuhur', prayer.dzuhur),
+                          _buildPrayerTimeRow('Ashr', prayer.ashr),
+                          _buildPrayerTimeRow('Magrib', prayer.magrib),
+                          _buildPrayerTimeRow('Isya', prayer.isya),
                         ],
-                      );
-                    }).toList(),
+                      ),
+                    ),
                   );
-                }
-              }
-            }),
-          ],
-        ),
+                }).toList(),
+              ),
+            );
+          }
+        }),
       ),
+    );
+  }
+
+  // Widget untuk menampilkan baris waktu adzan
+  Widget _buildPrayerTimeRow(String prayerName, String? prayerTime) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          '$prayerName ',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        Text(
+          prayerTime ?? '-',
+          style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+        ),
+      ],
     );
   }
 }
