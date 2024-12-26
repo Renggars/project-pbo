@@ -14,36 +14,26 @@ class KiblatView extends GetView<KiblatController> {
         title: const Text('Arah Kiblat'),
         centerTitle: true,
       ),
-      body: Obx(() {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Transform.rotate(
-                angle: (controller.qiblaDirection.value * (pi / 180)),
-                child: Icon(
-                  Icons.navigation,
-                  size: 200,
-                  color: Colors.teal,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Arah Kiblat: ${controller.qiblaDirection.value.toStringAsFixed(2)}°',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: controller.getUserLocation,
-                child: const Text('Perbarui Lokasi'),
-              ),
-            ],
-          ),
-        );
-      }),
+      body: Center(
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return CircularProgressIndicator(
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.teal),
+            ); // Menampilkan indikator loading saat proses
+          }
+
+          return Transform.rotate(
+            angle: (controller.kiblatOffset.value -
+                    controller.kiblatDirection.value) *
+                (pi / 180),
+            child: Icon(
+              Icons.navigation,
+              size: 160,
+              color: Colors.teal,
+            ),
+          );
+        }),
+      ),
     );
   }
 }
