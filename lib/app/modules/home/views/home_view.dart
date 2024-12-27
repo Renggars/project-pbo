@@ -131,17 +131,37 @@ class HomeView extends GetView<HomeController> {
                                   Get.defaultDialog(
                                     title: "Delete Last Read",
                                     middleText:
-                                        "Yakin ingin menghapus last read bookmark?",
+                                        "Yakin ingin menghapus last read?",
                                     actions: [
-                                      OutlinedButton(
-                                        onPressed: () => Get.back(),
-                                        child: Text("CANCEL"),
-                                      ),
                                       ElevatedButton(
-                                          onPressed: () {
-                                            c.deleteBookmark(lastRead["id"]);
-                                          },
-                                          child: Text("DELETE"))
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: greenPrimary,
+                                            foregroundColor: Colors.white),
+                                        child: Text(
+                                          "CANCEL",
+                                          style: TextStyle(
+                                              color: Colors
+                                                  .white), // Warna teks putih
+                                        ), // Background hijau
+                                      ),
+                                      SizedBox(width: 5),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          c.deleteBookmark(lastRead["id"]);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: greenPrimary,
+                                            foregroundColor: Colors.white),
+                                        child: Text(
+                                          "DELETE",
+                                          style: TextStyle(
+                                              color: Colors
+                                                  .white), // Warna teks putih
+                                        ), // Background hijau
+                                      ),
                                     ],
                                   )
                                 }
@@ -151,8 +171,14 @@ class HomeView extends GetView<HomeController> {
                                 {
                                   // bisa di arahkan ke page last read
                                   Get.toNamed(
-                                    Routes.LAST_READ,
-                                    arguments: lastRead,
+                                    Routes.DETAIL_SURAH,
+                                    arguments: {
+                                      "name": lastRead["surah"]
+                                          .toString()
+                                          .replaceAll("+", "'"),
+                                      "number": lastRead["number_surah"],
+                                      "bookmark": lastRead,
+                                    },
                                   )
                                 }
                             },

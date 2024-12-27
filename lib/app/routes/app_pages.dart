@@ -12,8 +12,6 @@ import '../modules/introduction/bindings/introduction_binding.dart';
 import '../modules/introduction/views/introduction_view.dart';
 import '../modules/kiblat/bindings/kiblat_binding.dart';
 import '../modules/kiblat/views/kiblat_view.dart';
-import '../modules/last_read/bindings/last_read_binding.dart';
-import '../modules/last_read/views/last_read_view.dart';
 import '../modules/masjid/bindings/masjid_binding.dart';
 import '../modules/masjid/views/masjid_view.dart';
 import '../modules/prayer_time/bindings/prayer_time_binding.dart';
@@ -41,11 +39,6 @@ class AppPages {
       name: _Paths.DETAIL_SURAH,
       page: () => DetailSurahView(),
       binding: DetailSurahBinding(),
-    ),
-    GetPage(
-      name: _Paths.LAST_READ,
-      page: () => const LastReadView(),
-      binding: LastReadBinding(),
     ),
     GetPage(
       name: _Paths.PRAYER_TIME,
