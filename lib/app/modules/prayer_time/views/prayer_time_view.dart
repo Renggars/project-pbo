@@ -4,25 +4,44 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controllers/prayer_time_controller.dart';
 
-class PrayerTimeView extends GetView<PrayerTimeController> {
+class PrayerTimeView extends StatefulWidget {
   const PrayerTimeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Mengatur orientasi layar ke landscape saat halaman dibuka
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeRight,
-        DeviceOrientation.landscapeLeft,
-      ]);
-    });
+  State<PrayerTimeView> createState() => _PrayerTimeViewState();
+}
 
+class _PrayerTimeViewState extends State<PrayerTimeView> {
+  final PrayerTimeController controller = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    // Mengatur orientasi ke landscape saat widget dibuat
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+  }
+
+  @override
+  void dispose() {
+    // Kembalikan orientasi ke portrait saat keluar dari halaman
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    // Menunggu perubahan orientasi selesai sebelum halaman dihancurkan
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return PopScope(
-      canPop: true, // Mengizinkan pengguna untuk kembali (pop)
+      canPop: true,
       onPopInvokedWithResult: (didPop, result) {
-        // Callback yang dipanggil setelah pop terjadi
         if (didPop) {
-          // Mengembalikan orientasi layar ke portrait
+          // Mengembalikan orientasi layar ke portrait setelah pop
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
@@ -51,18 +70,16 @@ class PrayerTimeView extends GetView<PrayerTimeController> {
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: SizedBox(
-              width: MediaQuery.of(context)
-                  .size
-                  .width, // Menyesuaikan dengan lebar layar
+              width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: DataTable(
-                  headingRowColor: WidgetStateProperty.resolveWith(
-                    (states) => const Color(
-                        0xFF557D7F), // Warna background untuk header
+                  headingRowColor: MaterialStateProperty.resolveWith(
+                    (states) =>
+                        const Color(0xFF557D7F), // Header background color
                   ),
                   headingTextStyle: const TextStyle(
-                    color: Colors.white, // Warna teks pada header
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   columns: const [
@@ -87,7 +104,7 @@ class PrayerTimeView extends GetView<PrayerTimeController> {
                         DateFormat('yyyy-MM-dd').format(prayer.tanggal!);
 
                     return DataRow(
-                      color: WidgetStateProperty.resolveWith(
+                      color: MaterialStateProperty.resolveWith(
                           (states) => backgroundColor),
                       cells: [
                         DataCell(Text(formattedDate)),
