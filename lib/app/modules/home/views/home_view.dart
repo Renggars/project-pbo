@@ -12,19 +12,16 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
-    if (Get.isDarkMode) {
-      controller.isDarkMode.value = true;
-    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Al Quran App'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(Routes.SEARCHING),
-            icon: const Icon(Icons.search),
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () => Get.toNamed(Routes.SEARCHING),
+        //     icon: const Icon(Icons.search),
+        //   )
+        // ],
       ),
       body: DefaultTabController(
         length: 2,
