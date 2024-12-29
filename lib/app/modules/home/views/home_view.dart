@@ -47,8 +47,8 @@ class HomeView extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(colors: [
-                              appLightPurple1,
-                              appDarkPurple,
+                              greenPrimary,
+                              Colors.teal[700]!,
                             ]),
                           ),
                           child: Stack(
